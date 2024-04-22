@@ -1,0 +1,14 @@
+{
+  "devDependencies": {
+    "prettier": "^3.2.5"
+  },
+  "name": "node.js-express-study",
+  "version": "1.0.0",
+  "description": "Node.js 백엔드 개발자 되기(책) - express 공부",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
