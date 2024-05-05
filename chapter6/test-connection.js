@@ -1,23 +1,20 @@
 require('dotenv').config();
-// getting-started.js
+
 const mongoose = require('mongoose');
 
 main().catch(err => console.log(err));
 
 async function main() {
-    await mongoose.connect(`mongodb://127.0.0.1:27017/study`, {
-        authSource: 'admin',
+    await mongoose.connect('mongodb://127.0.0.1:27017/test', {
+        authSource: 'admin', // means set authenticationDatabase to admin.
         user: process.env.DB_USERNAME,
         pass: process.env.DB_PASSWORD
-    }); //if your database has auth enabled
-    // 옼케이!! "auth": { "authSource": "admin" } means set authenticationDatabase to admin.
+    }); // If your database has auth enabled
 
-    const kittySchema = new mongoose.Schema({
-        name: String
-    });
-
-    const Kitten = mongoose.model('Kitten', kittySchema);
-
-    const silence = new Kitten({ name: 'Silence' });
-    console.log(silence.name); // 'Silence'
 }
+
+mongoose.connection.on('open', async () => {
+    const adminDB = mongoose.connection.db.admin();
+    const listDatabases = await adminDB.listDatabases();
+    console.log(listDatabases);
+});
